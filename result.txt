@@ -1,0 +1,28 @@
+arXiv URL: https://arxiv.org/abs/2410.08003
+Summary: The authors developed COMET, a new sparse neural network architecture inspired by biological neural systems, to address the limitations of existing sparse networks in handling multiple tasks efficiently.  COMET uses a fixed random projection instead of a trainable gating function, resulting in faster learning and better generalization across various tasks.
+
+
+arXiv URL: https://arxiv.org/abs/2410.04241
+Summary: The authors introduced a new task of question answering with source citations in ambiguous situations, creating five new datasets and evaluation metrics to address the lack of research in this area.  They then established baselines using various methods on large language models to encourage future research into more reliable and transparent QA systems.
+
+
+arXiv URL: https://arxiv.org/abs/2406.16779
+Summary: Researchers investigated how input order and emphasis affect large language models' reading comprehension performance, experimenting with nine models and three datasets.  They found that presenting the context before the question significantly improved accuracy (up to 31%), and context emphasis, especially through simple concatenation of tokens, yielded the best results, even enabling smaller models to surpass larger ones.
+
+
+arXiv URL: https://arxiv.org/abs/2402.00123
+Summary: Researchers compared language model probing using expert-designed templates versus naturally occurring text, finding that the two methods yielded different model rankings and accuracy scores, especially for general-purpose models.  Template-free probing showed a negative correlation between perplexity and accuracy, unlike the counterintuitive positive correlation found with template-based probing.
+
+
+arXiv URL: https://arxiv.org/abs/2401.18001
+Summary: The authors evaluated 15 question-answering systems across five datasets using a comprehensive set of criteria to understand the interplay of noise, conflicting context, and model consistency.  Their results revealed unexpected relationships between these factors, highlighting areas for improvement in system robustness and accuracy, with some combinations of issues leading to up to a 96% performance drop.
+
+
+arXiv URL: https://arxiv.org/abs/2310.10571
+Summary: The authors investigated whether adding irrelevant demographic information to biomedical questions affected the answers of two types of question-answering systems (knowledge graph-grounded and text-based), finding that it altered a significant percentage of answers (up to 23%) in both, highlighting fairness concerns in AI-driven healthcare.
+
+
+arXiv URL: https://arxiv.org/abs/2310.10583
+Summary: The authors argue that current language models are unreliable, especially for low-resource languages, and propose a solution: building language models that cite their sources to improve trustworthiness and verifiability.  They discuss the benefits and challenges of this approach, aiming to initiate a discussion on improving language model development.
+
+
