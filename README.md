@@ -1,6 +1,6 @@
 # ArXiv Paper Summarizer
 
-This repository provides a Python script to fetch and summarize research papers from arXiv using the free Gemini API. The tool is designed to help researchers, students, and enthusiasts quickly extract key insights from arXiv papers without manually reading through lengthy documents.
+This repository provides a Python script to fetch and summarize research papers from arXiv using the free Gemini API. Additionally, I will show you how to use this script to automatically exctract and summarize articles from arxiv daily based on keywords (see ~add link to the below section called "Automatic Daily Extraction and Summarization"). The tool is designed to help researchers, students, and enthusiasts quickly extract key insights from arXiv papers without manually reading through lengthy documents.
 
 ## Features
 - **Single Paper Summarization**: Summarize a single arXiv paper by providing its URL.
@@ -64,6 +64,49 @@ python arxiv_summarize.py
 > Enter 1 for single paper or 2 for multiple papers: 1
 > Enter the arXiv URL: https://arxiv.org/abs/2410.08003
 ```
+
+## Automatic Daily Extraction and Summarization  
+  
+ You can automate the extraction and summarization of arXiv articles based on specific keywords using Google Apps Script.  
+ This setup will run daily and add newly found article titles (with links) to a Google Doc.  
+  
+ ### Steps to Set Up  
+  
+ 1. **Open Google Apps Script**  
+    - Log in to your Google account and go to [Google Apps Script](https://script.google.com/home/my).  
+    - Click on **"New project"** in the top left.  
+  
+ 2. **Create a Google Doc**  
+    - Open [Google Docs](https://docs.google.com).  
+    - Click **Blank document** to create a new document.  
+    - Copy the **document ID** from the URL.  
+      - The ID is the long string in the document's URL, e.g., `123HEM4h5aQwygDk_A-xNaJ8CUoyMZTFsChyMk`.  
+  
+ 3. **Copy and Modify the Script**  
+    - Open the `daily_arxiv.py` file in this repository.  
+    - Copy and paste its content into the Google Apps Script editor.  
+    - Locate the `var docId` in the script (around line 3) and replace it with the **Google Doc ID** from Step 2.  
+    - Add your **Gemini API Key** around **line 81** (look for `var apiKey =`).
+    - Locate `var keywords = [...]` around **line 4** and update it with your preferred keywords.  
+  
+ 4. **Test the Script**  
+    - Click the **Run** button at the top to execute the script (you might need to provide permissions).  
+    - If everything works correctly, your Google Doc should now contain a list of arXiv article titles with links.  
+  
+ 5. **Schedule Daily Execution**  
+    - Click on the **clock icon** on the left (Triggers).  
+    - Click **"Add trigger"** in the bottom right.  
+    - Configure the trigger settings:  
+      - **Function**: Select the main function from the dropdown.  
+      - **Event Source**: Choose **Time-driven**.  
+      - **Type**: Select **Day timer**.  
+      - **Time Range**: Pick a time slot (e.g., midnight to 1 AM).  
+      - **Notifications**: Enable email notifications if you want updates.  
+    - Click **Save**.  
+  
+ Now, your script will automatically fetch and summarize new arXiv articles daily based on your chosen keywords!  
+
+
 
 ## Contributing
 Contributions are welcome! If you have suggestions, improvements, or bug fixes, please open an issue or submit a pull request.
