@@ -34,7 +34,7 @@ function fetchAndWritePapers() {
             var summaryParagraph = body.appendParagraph(summary);
             summaryParagraph.setIndentStart(30); // Indentation for readability
             summaryParagraph.setSpacingBefore(5); // Ensures space before summary
-            Utilities.sleep(3000); // Pause for 3 second because of the free Gemini quota
+            Utilities.sleep(5000); // Pause for 5 second because of the free Gemini quota
           } else {
             var summaryParagraph = body.appendParagraph("Abstract not available.");
             summaryParagraph.setIndentStart(30);
