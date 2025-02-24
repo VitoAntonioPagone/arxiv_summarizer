@@ -1,6 +1,6 @@
 # ArXiv Paper Summarizer
 
-This repository provides a Python script to fetch and summarize research papers from arXiv using the free Gemini API. Additionally, I will show you how to use this script to automatically exctract and summarize articles from arxiv daily based on keywords (see ~add link to the below section called "Automatic Daily Extraction and Summarization"). The tool is designed to help researchers, students, and enthusiasts quickly extract key insights from arXiv papers without manually reading through lengthy documents.
+This repository provides a Python script to fetch and summarize research papers from arXiv using the free Gemini API. Additionally, it demonstrates how to automate the extraction and summarization of arXiv articles daily based on specific keywords (see the section titled "Automatic Daily Extraction and Summarization" below). The tool is designed to help researchers, students, and enthusiasts quickly extract key insights from arXiv papers without manually reading through lengthy documents.
 
 ## Features
 - **Single Paper Summarization**: Summarize a single arXiv paper by providing its URL.
