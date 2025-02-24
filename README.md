@@ -83,7 +83,7 @@ python arxiv_summarize.py
       - The ID is the long string in the document's URL, e.g., `123HEM4h5aQwygDk_A-xNaJ8CUoyMZTFsChyMk`.  
   
  3. **Copy and Modify the Script**  
-    - Open the `daily_arxiv.py` file in this repository.  
+    - Open the `daily_arxiv.txt` file in this repository.  
     - Copy and paste its content into the Google Apps Script editor.  
     - Locate the `var docId` in the script (around line 3) and replace it with the **Google Doc ID** from Step 2.  
     - Add your **Gemini API Key** around **line 81** (look for `var apiKey =`).
