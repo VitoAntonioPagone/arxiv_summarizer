@@ -68,7 +68,7 @@ python arxiv_summarize.py
 ## Automatic Daily Extraction and Summarization  
   
  You can automate the extraction and summarization of arXiv articles based on specific keywords using Google Apps Script.  
- This setup will run daily and add newly found article titles (with links) to a Google Doc.  
+ This setup will run daily and add newly found article titles (with links and summaries) to a Google Doc.  
   
  ### Steps to Set Up  
   
