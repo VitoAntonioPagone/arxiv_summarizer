@@ -1,7 +1,7 @@
 // Function to fetch and process papers
 function fetchAndWritePapers() {
   var docId = "GOOGLE-DOC-ID"; // Replace with your Google Doc ID
-  var keywords = ['mixture', 'moe', 'question', 'conflict', 'forget', 'hallucinat', 'llm', 'lifelong', 'language model', 'continual', 'fact', 'context', 'knowledge', 'cite', 'citation', 'reference'];
+  var keywords = ['language models', 'llm'];
   var arxivRssUrl = 'http://arxiv.org/rss/cs.AI'; 
 
   try {
