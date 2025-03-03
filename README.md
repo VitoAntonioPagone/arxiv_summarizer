@@ -3,8 +3,9 @@
 This repository provides a Python script to fetch and summarize research papers from arXiv using the free Gemini API. Additionally, it demonstrates how to automate the extraction and summarization of arXiv articles daily based on specific keywords (see the section titled "Automatic Daily Extraction and Summarization" below). The tool is designed to help researchers, students, and enthusiasts quickly extract key insights from arXiv papers without manually reading through lengthy documents.
 
 ## Features
-- **Single Paper Summarization**: Summarize a single arXiv paper by providing its URL.
-- **Batch Summarization**: Summarize multiple arXiv papers by listing their URLs in a text file.
+- **Single URL Summarization**: Summarize a single arXiv paper by providing its URL.
+- **Batch URL Summarization**: Summarize multiple arXiv papers by listing their URLs in a text file.
+- **Batch Keywords Summarization**: Fetch and summarize all papers from arXiv based on keywords and date ranges.
 - **Easy Setup**: Simple installation and configuration process using Conda and pip.
 - **Gemini API Integration**: Leverages the free Gemini API for high-quality summarization.
 
@@ -35,35 +36,54 @@ pip install -r requirements.txt
 ```
 
 ### 4. Configure the Gemini API Key
-Obtain your Gemini API key from [Google's Gemini API page](https://ai.google.dev/gemini-api/docs/api-key). Once you have the key, open the `arxiv_summarize.py` file and replace `YOUR_GEMINI_API_KEY` on line 5 with your actual API key.
+Obtain your Gemini API key from [Google's Gemini API page](https://ai.google.dev/gemini-api/docs/api-key). Once you have the key, open the `url_summarize.py` file and replace `YOUR_GEMINI_API_KEY` on line 5 with your actual API key.
 
 ## Usage
 
-### Summarize a Single Paper
+### Summarize a Single Paper (Based on a Single URL)
 To summarize a single arXiv paper, run the script and provide the arXiv URL (ensure it is the abstract page, not the PDF link):
 ```bash
-python arxiv_summarize.py
+python url_summarize.py
 ```
 When prompted:
 1. Enter `1` to summarize a single paper.
 2. Provide the arXiv URL (e.g., `https://arxiv.org/abs/2410.08003`).
 
-### Summarize Multiple Papers
+### Summarize Multiple Papers (Based on Multiple URLs)
 To summarize multiple papers:
 1. Add the arXiv URLs to the `links.txt` file, with one URL per line.
 2. Run the script:
 ```bash
-python arxiv_summarize.py
+python url_summarize.py
 ```
-3. When prompted, enter `2` to process all URLs listed in `links.txt`. The result summaries will be written in `result.txt`.
+3. When prompted, enter `2` to process all URLs listed in `links.txt`. Summaries are saved in `result.txt`.
 
 ## Example
 Here’s an example of how to use the script:
 ```bash
-python arxiv_summarize.py
+python url_summarize.py
 > Enter 1 for single paper or 2 for multiple papers: 1
 > Enter the arXiv URL: https://arxiv.org/abs/2410.08003
 ```
+
+### Summarize Multiple Papers (Based on Keywords)
+ 
+`keywords_summarizer.py` enables fetching and summarizing papers based on specified keywords and date ranges. This is useful for tracking new research trends, generating related work sections, or conducting systematic reviews across multiple keywords at once.
+ 
+### Usage  
+  
+1. **Run the script** and provide your search criteria:  
+```bash  
+python keywords_summarizer.py  
+```  
+2. **Specify keywords and a date range** when prompted. Example input:  
+```bash  
+Enter keywords: "transformer, sparsity, MoE"  
+Enter start date (YYYY-MM-DD): 2017-01-01  
+Enter end date (YYYY-MM-DD): 2024-03-01  
+```  
+3. The script fetches relevant papers from arXiv and generates summaries. The results are saved in `results.txt`.  
+
 
 ## Automatic Daily Extraction and Summarization  
   
