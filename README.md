@@ -82,7 +82,7 @@ Enter keywords: "transformer, sparsity, MoE"
 Enter start date (YYYY-MM-DD): 2017-01-01  
 Enter end date (YYYY-MM-DD): 2024-03-01  
 ```  
-3. The script fetches relevant papers from arXiv and generates summaries. The results are saved in `results.txt`.  
+3. The script fetches relevant papers from arXiv and generates summaries. The results are saved in `result.txt`.  
 
 
 ## Automatic Daily Extraction and Summarization  
