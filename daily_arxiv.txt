@@ -1,6 +1,7 @@
-// Function to fetch and process papers
+// Function to fetch, process papers, and send an email update
 function fetchAndWritePapers() {
   var docId = "GOOGLE-DOC-ID"; // Replace with your Google Doc ID
+  var recipientEmail = ""; // Replace with your email
   var keywords = ['Physics-Informed'];
   var arxivRssUrl = 'http://arxiv.org/rss/cs.AI';
 
@@ -23,6 +24,8 @@ function fetchAndWritePapers() {
     var items = channel.getChildren("item");
 
     var paperCount = 1; // Correctly track numbering for new papers
+    var emailContent = "<h2>📢 New Research Papers Update</h2>";
+    emailContent += "<p><b>Updated on: " + formattedDate + "</b></p><hr>";
 
     for (var i = 0; i < items.length; i++) {
       var title = items[i].getChildText("title");
@@ -50,6 +53,11 @@ function fetchAndWritePapers() {
           summaryParagraph.setSpacingBefore(5); // Ensures space before summary
           summaryParagraph.setForegroundColor("#000000"); // Standard black text
 
+          // Add to email content
+          emailContent += "<h3 style='color:#1a73e8'>" + paperCount + ") " + title + "</h3>";
+          emailContent += "<p><a href='" + link + "' style='color:#0000EE'>Read Paper</a></p>";
+          emailContent += "<p>" + summaryText + "</p><hr>";
+
           Utilities.sleep(5000); // Pause for 5 seconds due to the free Gemini quota
 
           paperCount++;
@@ -60,12 +68,21 @@ function fetchAndWritePapers() {
 
     if (paperCount === 1) {
       body.insertParagraph(1, "No new relevant papers found.\n\n").setBold(true);
+      emailContent += "<p>No new relevant papers found.</p>";
     }
+
+    // Send email update
+    MailApp.sendEmail({
+      to: recipientEmail,
+      subject: "📰 Research Papers Update - " + formattedDate,
+      htmlBody: emailContent
+    });
 
   } catch (e) {
     Logger.log("Error: " + e.toString());
   }
 }
+
 
 
 // Function to fetch the abstract from an arXiv URL
@@ -95,7 +112,7 @@ function fetchAbstract(arxivUrl) {
 function summarizeWithGemini(abstract) {
   try {
     Logger.log("Summarizing abstract using Gemini API...");
-    var apiKey = "AIzaSyBhmhb5uosE7KVYq6VzLmN45MxcqRlNnxQ"; // Replace with your Gemini API key
+    var apiKey = ""; // Replace with your Gemini API key
     var apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey;
 
     var payload = {
