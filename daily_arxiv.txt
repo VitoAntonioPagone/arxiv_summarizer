@@ -1,12 +1,20 @@
 // Function to fetch and process papers
 function fetchAndWritePapers() {
   var docId = "GOOGLE-DOC-ID"; // Replace with your Google Doc ID
-  var keywords = ['language models', 'llm'];
-  var arxivRssUrl = 'http://arxiv.org/rss/cs.AI'; 
+  var keywords = ['Physics-Informed'];
+  var arxivRssUrl = 'http://arxiv.org/rss/cs.AI';
 
   try {
     var doc = DocumentApp.openById(docId);
     var body = doc.getBody();
+    var existingText = body.getText(); // Get current document content
+
+    // Insert date at the top
+    var now = new Date();
+    var formattedDate = Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm:ss");
+    var header = body.insertParagraph(0, "---\nUpdated on: " + formattedDate + "\n---\n");
+    header.setBold(true);
+
     var response = UrlFetchApp.fetch(arxivRssUrl);
     var responseText = response.getContentText();
     var xml = XmlService.parse(responseText);
@@ -14,42 +22,51 @@ function fetchAndWritePapers() {
     var channel = rootElement.getChild("channel");
     var items = channel.getChildren("item");
 
-    var paperCount = 1; // Correctly track numbering for papers
+    var paperCount = 1; // Correctly track numbering for new papers
 
     for (var i = 0; i < items.length; i++) {
-      var title = items[i].getChildText("title").toLowerCase();
+      var title = items[i].getChildText("title");
       var link = items[i].getChildText("link");
       var description = items[i].getChildText("description"); // Abstract
 
       for (var j = 0; j < keywords.length; j++) {
-        if (title.includes(keywords[j].toLowerCase())) {
-          // Append paper title as a paragraph with correct numbering
-          var listItem = body.appendParagraph(paperCount + ") " + title);
-          listItem.setLinkUrl(link);
-          listItem.setBold(true);
+        if (title.toLowerCase().includes(keywords[j].toLowerCase())) {
+          
+          // Insert paper title in blue and bold
+          var titleParagraph = body.insertParagraph(1, paperCount + ") " + title);
+          titleParagraph.setForegroundColor("#1a73e8"); // Google Blue
+          titleParagraph.setBold(true);
+          
+          // Insert clickable link
+          var linkParagraph = body.insertParagraph(2, link);
+          linkParagraph.setLinkUrl(link);
+          linkParagraph.setForegroundColor("#0000EE"); // Standard hyperlink color
+          linkParagraph.setBold(false);
 
-          // Ensure spacing consistency for summary
-          if (description) {
-            var summary = summarizeWithGemini(description);
-            var summaryParagraph = body.appendParagraph(summary);
-            summaryParagraph.setIndentStart(30); // Indentation for readability
-            summaryParagraph.setSpacingBefore(5); // Ensures space before summary
-            Utilities.sleep(5000); // Pause for 5 second because of the free Gemini quota
-          } else {
-            var summaryParagraph = body.appendParagraph("Abstract not available.");
-            summaryParagraph.setIndentStart(30);
-            summaryParagraph.setSpacingBefore(5);
-          }
+          // Fetch and insert summary in standard black
+          var summaryText = description ? summarizeWithGemini(description) : "Abstract not available.";
+          var summaryParagraph = body.insertParagraph(3, summaryText);
+          summaryParagraph.setIndentStart(30); // Indentation for readability
+          summaryParagraph.setSpacingBefore(5); // Ensures space before summary
+          summaryParagraph.setForegroundColor("#000000"); // Standard black text
 
-          paperCount++; // Increment paper count correctly
+          Utilities.sleep(5000); // Pause for 5 seconds due to the free Gemini quota
+
+          paperCount++;
           break;
         }
       }
     }
+
+    if (paperCount === 1) {
+      body.insertParagraph(1, "No new relevant papers found.\n\n").setBold(true);
+    }
+
   } catch (e) {
     Logger.log("Error: " + e.toString());
   }
 }
+
 
 // Function to fetch the abstract from an arXiv URL
 function fetchAbstract(arxivUrl) {
@@ -78,7 +95,7 @@ function fetchAbstract(arxivUrl) {
 function summarizeWithGemini(abstract) {
   try {
     Logger.log("Summarizing abstract using Gemini API...");
-    var apiKey = "GEMINI-API-KEY"; // Replace with your Gemini API key
+    var apiKey = "AIzaSyBhmhb5uosE7KVYq6VzLmN45MxcqRlNnxQ"; // Replace with your Gemini API key
     var apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey;
 
     var payload = {
